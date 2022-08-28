@@ -1,0 +1,54 @@
+<div id="chatField" class="body" >
+    <div class="send-parent">
+        <div class="send-message">
+            sdsdf afjgsdfjkvn dfvsdfvb sdfv sdfv jksdfvnij sdfv jsldfkjv dfgsdfg
+        </div>
+
+    </div>
+    <div class="recieve-parent">
+        <div class="recieve-message">
+            sdsdffbdfgbhdfgh sdfdfghdfgb sfgsdfg sdfgb sdfg
+        </div>
+    </div>
+    <div class="recieve-parent">
+        <div class="recieve-message">
+            sdsdffbdfgbhdfgh sdfdfghdfgb sfgsdfg sdfgb sdfg
+        </div>
+    </div>
+    <div class="recieve-parent">
+        <div class="recieve-message">
+            sdsdffbdfgbhdfgh sdfdfghdfgb sfgsdfg sdfgb sdfg
+        </div>
+    </div>
+    <div class="send-parent">
+        <div class="send-message">
+            sdsdf afjgsdfjkvn dfvsdfvb sdfv sdfv jksdfvnij sdfv jsldfkjv dfgsdfg
+        </div>
+
+    </div>
+    <div style="position:absolute; bottom:0; width:100%; display:flex;wrap:nowrap;">
+        <input type="text" id="msgeInput" style="width: 90%;">
+        <button onclick="sendMessage()" style="width:10%">send</button>
+    </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"
+    integrity="sha512-9mpsATI0KClwt+xVZfbcf2lJ8IFBAwsubJ6mI3rtULwyM3fBmQFzj0It4tGqxLOGQwGfJdk/G+fANnxfq9/cew=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    console.log("wefef")
+    const socket = io.connect('http://localhost:4000', { transports: ['websocket'] })
+    console.log(socket)
+    socket.emit('send', { message: "poda pulle" })
+    socket.on('recieve', (data) => {
+        console.log(data)
+    })
+
+    function sendMessage() {
+        let msge = document.getElementById("msgeInput").value
+        let name = "Nishand"
+        socket.emit('send', { message: msge, name: name })
+    }
+
+</script>
