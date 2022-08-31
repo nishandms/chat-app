@@ -1,3 +1,4 @@
 module.exports = {
-    msge: "message"
+    msge: "message",
+    user: "user"
 }

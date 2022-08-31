@@ -12,8 +12,9 @@ mongo.connect((err) => {
 
 
 
-var home = require('./routes/home');
-var chatField = require('./routes/chatField');
+var user = require('./routes/users');
+var chatField = require('./routes/chat_field');
+// const { user } = require('./config/constants');
 
 var app = express();
 
@@ -27,7 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', home);
+app.use('/', user);
 app.use('/chat_field', chatField);
 
 // catch 404 and forward to error handler
