@@ -2,18 +2,22 @@
     <div class="col-md-4 login-card">
         <div class="card card-body login-card-child">
             <form action="/rest/login" method="post">
-            <div class="col-md-12">
-                <input class="form-control text-input" type="text" name="username" placeholder="Email Address or Phone number" >
-            </div>
-            <div class="col-md-12 mt-3">
-                <input class="form-control text-input" type="password" name="password" placeholder="Password" >
-            </div>
-            <div class="col-md-12 mt-3 ">
-                <a style="color:#12273a;" href="/signup">Create New Account</a>
-                <button class="btn btn-primary float-end">Login</button>
-            </div>
+                <div class="col-md-12 text-center text-danger">
+                    <h6 style="color: #ff6464;">{{error}}</h6>
+                </div>
+                <div class="col-md-12">
+                    <input class="form-control text-input" type="text" name="username"
+                        placeholder="Email Address or Phone number">
+                </div>
+                <div class="col-md-12 mt-3">
+                    <input class="form-control text-input" type="password" name="password" placeholder="Password">
+                </div>
+                <div class="col-md-12 mt-3 ">
+                    <a style="color:#12273a;" href="/signup">Create New Account</a>
+                    <button class="btn btn-primary float-end">Login</button>
+                </div>
             </form>
-            
+
         </div>
     </div>
 </div>

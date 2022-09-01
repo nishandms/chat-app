@@ -20,15 +20,17 @@ module.exports = {
             if (userData) {
                 bcrypt.compare(user.password, userData.password).then(data => {
                     if (data) {
-                        console.log("successfuly login")
+                        console.log(`${user.username} successfuly logged in`);
+                        resolve(true);
                     }
                     else {
+                        resolve(false);
                         console.log("login failed")
                     }
                 })
             }
             else {
-                console.log("db data not loaded")
+                reject(true);
             }
         })
     }

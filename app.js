@@ -4,28 +4,31 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongo = require("./config/mongo-connect");
+var session = require('express-session');
+var user = require('./routes/users');
+var chatField = require('./routes/chat_field');
 
 mongo.connect((err) => {
   if (err) console.log("connection failed");
   else console.log("database connected successfully");
-})
+});
 
-
-
-var user = require('./routes/users');
-var chatField = require('./routes/chat_field');
-// const { user } = require('./config/constants');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({
+                 secret: "key",
+                 resave: false,
+                 saveUninitialized: true,
+                 cookie:{ maxAge: 60000 }}
+                 ))
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', user);
