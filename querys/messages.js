@@ -2,16 +2,30 @@ var db = require("../config/mongo-connect")
 const constants = require("../config/constants.js")
 
 module.exports = {
-    addMessage: (message, callback) => {
-        db.getDb().collection(constants.msge).insertOne(message).then((data) => {
-            callback(data)
+
+    createUserStorage: (id) =>{
+        return new Promise(async(resolve, reject) => {
+            let newCollection = {
+                    userId: id,
+                    messages: []
+            };
+            db.getDb().collection(constants.msge).insertOne(newCollection).then(data => {
+                resolve(data);
+            }).catch(err => {
+                reject(err);
+            });
+        });
+    },
+
+    addMessage: (id,message) => {
+        return new Promise((resolve, reject) => {
+            db.getDb().collection(constants.msge).updateOne({ userId: id },{ $push: { messages: message }}).then(data =>{
+                resolve(data)
+            }).catch(err => {
+                reject(err)
+            })
         })
     },
-    // addPrduct: (product, callback) => {
-    //     db.getDb().collection("product").insertOne(product).then((data) => {
-    //         callback(data.insertedId.toString())
-    //     })
-    // },
 
     getAllMessages: () => {
         return new Promise(async(resolve, reject) => {

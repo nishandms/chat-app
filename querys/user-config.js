@@ -8,7 +8,8 @@ module.exports = {
         return new Promise(async (resolve, reject) => {
             user.password = await bcrypt.hash(user.password, 10);
             db.getDb().collection(constants.user).insertOne(user).then((data) => {
-                resolve(data)
+                console.log(data.insertedId.toString())
+                resolve(data.insertedId.toString())
             }).catch(err => {
                 reject(err)
             })
@@ -21,10 +22,10 @@ module.exports = {
                 bcrypt.compare(user.password, userData.password).then(data => {
                     if (data) {
                         console.log(`${user.username} successfuly logged in`);
-                        resolve(true);
+                        resolve(userData);
                     }
                     else {
-                        resolve(false);
+                        resolve({});
                         console.log("login failed")
                     }
                 })
@@ -32,6 +33,20 @@ module.exports = {
             else {
                 reject(true);
             }
+        })
+    },
+    getAllFrnds: ()=>{
+        return new Promise(async (resolve,reject) => {
+            let userData = await db.getDb().collection(constants.user).find().toArray();
+            if(userData) {
+                let frndsList = userData.map(ele =>{
+                    const {password , _id, name} = ele;
+                    return {name: name, _id: _id.toString(),};
+                })
+                resolve(frndsList)
+            } else {
+                reject([])
+            }        
         })
     }
 }
