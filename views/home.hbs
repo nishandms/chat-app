@@ -1,63 +1,67 @@
 <div class="main-div">
     <div class="nav-bar">
-        
+
     </div>
     <div class="frnds-panel">
         <ul class="list-group" id="frnds-list">
-  <li class="list-group-item">An item</li>
-  <li class="list-group-item">A second item</li>
-  <li class="list-group-item">A third item</li>
-  <li class="list-group-item">A fourth item</li>
-  <li class="list-group-item">And a fifth one</li>
-</ul>
+            <li class="list-group-item">An item</li>
+            <li class="list-group-item">A second item</li>
+            <li class="list-group-item">A third item</li>
+            <li class="list-group-item">A fourth item</li>
+            <li class="list-group-item">And a fifth one</li>
+        </ul>
     </div>
     <div class="chat-field">
-        <div class="msg-field">
-            <div class="send-parent">
-                 <div class="send-message">
-                     sdsdf afjgsdfjkvn dfvsdfvb sdfv sdfv jksdfvnij sdfv jsldfkjv dfgsdfg
-                </div>
-            </div>
-            <div class="recieve-parent">
-             <div class="recieve-message">
-             sdsdffbdfgbhdfgh sdfdfghdfgb sfgsdfg sdfgb sdfg
-            </div>
-    </div>
-      <div class="send-parent">
-                 <div class="send-message">
-                     sdsdf afjgsdfjkvn dfvsdfvb sdfv sdfv jksdfvnij sdfv jsldfkjv dfgsdfg
-                </div>
-            </div>
-            <div class="recieve-parent">
-             <div class="recieve-message">
-             sdsdffbdfgbhdfgh sdfdfghdfgb sfgsdfg sdfgb sdfg
-            </div>
-    </div>
-      <div class="send-parent">
-                 <div class="send-message">
-                     sdsdf afjgsdfjkvn dfvsdfvb sdfv sdfv jksdfvnij sdfv jsldfkjv dfgsdfgjhdgje eekdnf jdhvf ajdhvb akjdvhn asjdhbv akjsdhvb akhdbv adhv asdkv 
-                </div>
-            </div>
-            <div class="recieve-parent">
-             <div class="recieve-message">
-             sdsdffbdfgbhdfgh sdfdfghdfgb sfgsdfg sdfgb sdfg
-            </div>
-    </div>
-      <div class="send-parent">
-                 <div class="send-message">
-                     sdsdf afjgsdfjkvn dfvsdfvb sdfv sdfv jksdfvnij sdfv jsldfkjv dfgsdfg
-                </div>
-            </div>
-            <div class="recieve-parent">
-             <div class="recieve-message">
-             sdsdffbdfgbhdfgh sdfdfghdfgb sfgsdfg sdfgb sdfg
-            </div>
-    </div>
+        <div class="welcome-note active">
+            <h2>Welcome to chat app</h2>
         </div>
-        
-        <div class="input-field">
-            <input class="form-control text-input" id="input-field" type="text" >
-            <div class="btn-parent text-center" >   
+        <div class="msg-field hide" id="field">
+            <div class="send-parent">
+                <div class="send-message">
+                    sdsdf afjgsdfjkvn dfvsdfvb sdfv sdfv jksdfvnij sdfv jsldfkjv dfgsdfg
+                </div>
+            </div>
+            <div class="recieve-parent">
+                <div class="recieve-message">
+                    sdsdffbdfgbhdfgh sdfdfghdfgb sfgsdfg sdfgb sdfg
+                </div>
+            </div>
+            <div class="send-parent">
+                <div class="send-message">
+                    sdsdf afjgsdfjkvn dfvsdfvb sdfv sdfv jksdfvnij sdfv jsldfkjv dfgsdfg
+                </div>
+            </div>
+            <div class="recieve-parent">
+                <div class="recieve-message">
+                    sdsdffbdfgbhdfgh sdfdfghdfgb sfgsdfg sdfgb sdfg
+                </div>
+            </div>
+            <div class="send-parent">
+                <div class="send-message">
+                    sdsdf afjgsdfjkvn dfvsdfvb sdfv sdfv jksdfvnij sdfv jsldfkjv dfgsdfgjhdgje eekdnf jdhvf ajdhvb
+                    akjdvhn asjdhbv akjsdhvb akhdbv adhv asdkv
+                </div>
+            </div>
+            <div class="recieve-parent">
+                <div class="recieve-message">
+                    sdsdffbdfgbhdfgh sdfdfghdfgb sfgsdfg sdfgb sdfg
+                </div>
+            </div>
+            <div class="send-parent">
+                <div class="send-message">
+                    sdsdf afjgsdfjkvn dfvsdfvb sdfv sdfv jksdfvnij sdfv jsldfkjv dfgsdfg
+                </div>
+            </div>
+            <div class="recieve-parent">
+                <div class="recieve-message">
+                    sdsdffbdfgbhdfgh sdfdfghdfgb sfgsdfg sdfgb sdfg
+                </div>
+            </div>
+        </div>
+
+        <div class="input-field hide">
+            <input class="form-control text-input" id="input-field" type="text">
+            <div class="btn-parent text-center">
                 <button class="btn btn-info send-btn" id="send-btn"><i class="fa-solid fa-paper-plane"></i></button>
             </div>
         </div>
@@ -67,53 +71,73 @@
     integrity="sha512-9mpsATI0KClwt+xVZfbcf2lJ8IFBAwsubJ6mI3rtULwyM3fBmQFzj0It4tGqxLOGQwGfJdk/G+fANnxfq9/cew=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-        let fromUserId;
-        let toUserId;
-        const socket = io.connect('http://localhost:4000', { transports: ['websocket'] })
-        getUserDetails()
-        getFrnds() 
-        $("#send-btn").click(()=> {
-            let msge =$("#input-field").val();
-            let time =  getTime();
-            let sendData = {
-                fromId: fromUserId,
-                toId: toUserId,
-                message: msge,
-                time: time
+    let fromUserId;
+    let toUserId;
+    const socket = io.connect('http://localhost:4000', { transports: ['websocket'] })
+
+    getUserDetails()
+    getFrnds()
+    $("#send-btn").click(() => {
+        let msge = $("#input-field").val();
+        let time = getTime();
+        const sendMsgeEle = `<div class="send-parent">
+                <div class="send-message">
+                   ${msge}
+                </div>
+            </div>`
+        let sendData = {
+            fromId: fromUserId,
+            toId: toUserId,
+            message: msge,
+            time: time
+        }
+        socket.emit('send', sendData);
+        $("#input-field").val("");
+        $('#field').append(sendMsgeEle);
+    })
+    socket.on("message", (data) => {
+        const recivedMsge = `<div class="recieve-parent">
+                <div class="recieve-message">
+                    ${data.message}
+                </div>
+            </div>`;
+        $('#field').append(recivedMsge);
+    });
+    
+    function getTime() {
+        return Date.now();
+    }
+
+    function getFrnds() {
+        $.ajax({
+            url: "/rest/get-frnds",
+            method: "GET"
+        }).done(data => {
+            console.log(data)
+            if (data) {
+                $("#frnds-list").html("");
+                data.forEach(ele => {
+                    $("#frnds-list").append(`<li class="list-group-item" onclick="loadChat('${ele._id}')">${ele.name}</li>`)
+                })
             }
-            socket.emit('send', sendData);
         })
+    }
 
-        function getTime() {
-            return Date.now();
-        }
+    function getUserDetails() {
+        $.ajax({
+            url: "/rest/get-user-details",
+            method: "GET"
+        }).done(data => {
+            fromUserId = data._id;
+            socket.emit('join', fromUserId);
+        })
+    }
 
-        function getFrnds() {
-            $.ajax({
-                url: "/rest/get-frnds",
-                method: "GET"
-            }).done(data => {
-                console.log(data)
-                if (data) {
-                    $("#frnds-list").html("");
-                    data.forEach(ele => {
-                        $("#frnds-list").append(`<li class="list-group-item" onclick="loadChat('${ele._id}')">${ele.name}</li>`)
-                    })
-                }
-            })
-        }
-
-        function getUserDetails() {
-             $.ajax({
-                url: "/rest/get-user-details",
-                method: "GET"
-            }).done(data => {
-               fromUserId = data._id;
-            })
-        }
-
-        function loadChat(id) {
-            console.log(id)
-            toUserId = id;
-        }
+    function loadChat(id) {
+        $("#field").html('');
+        $(".msg-field").removeClass('hide');
+        $('.input-field').removeClass('hide');
+        $(".welcome-note").removeClass('active');
+        toUserId = id;
+    }
 </script>

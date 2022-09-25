@@ -6,15 +6,18 @@ const io = require('socket.io')(4000).sockets;
 
 
 io.on('connection', function (socket) {
-  console.log("socket connected")
+  socket.on('join', function(room){
+    socket.join(room);
+})
   socket.on('send', function (data) {
     if(data) {
-      querys.addMessage(data.fromId,data).then(res=> {
-        console.log(res);
-      });
-      querys.addMessage(data.toId,data).then(res=> {
-        console.log(res);
-      })
+      socket.to(data.toId).emit('message',data);
+      // querys.addMessage(data.fromId,data).then(res=> {
+      //   console.log(res);
+      // });
+      // querys.addMessage(data.toId,data).then(res=> {
+      //   console.log(res);
+      // })
     }
   });
 

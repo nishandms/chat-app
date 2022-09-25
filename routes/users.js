@@ -24,7 +24,8 @@ router.get('/home',(req, res, next)=>{
 router.get('/rest/get-frnds', (req, res, next)=> {
   if(req.session.loggedIn) {
     users.getAllFrnds().then(data => {
-      res.send(data);
+      let response = (data || []).filter(ele => ele._id !== req.session.userId);
+      res.send(response);
     }).catch(err => {
       res.send("Failed");
     })
