@@ -7,10 +7,12 @@ const io = require('socket.io')(4000).sockets;
 
 io.on('connection', function (socket) {
   socket.on('join', function(room){
+    console.log('joined in the room')
     socket.join(room);
 })
   socket.on('send', function (data) {
     if(data) {
+      console.log(data)
       socket.to(data.toId).emit('message',data);
       // querys.addMessage(data.fromId,data).then(res=> {
       //   console.log(res);
