@@ -1,26 +1,41 @@
-<div class="login-div">
-    <div class="col-md-4 login-card">
-        <div class="card card-body login-card-child">
-            <form action="/rest/login" method="post">
-                <div class="col-md-12 text-center text-danger">
-                    <h6 style="color: #ff6464;">{{error}}</h6>
-                </div>
-                <div class="col-md-12">
-                    <input class="form-control text-input" type="text" name="username"
-                        placeholder="Email Address or Phone number">
-                </div>
-                <div class="col-md-12 mt-3">
-                    <input class="form-control text-input" type="password" name="password" placeholder="Password">
-                </div>
-                <div class="col-md-12 mt-3 ">
-                    <a style="color:#12273a;" href="/signup">Create New Account</a>
-                    <button class="btn btn-primary float-end">Login</button>
-                </div>
-            </form>
-
+<div class="login-container">
+    <div class="left-panel">
+        <div class="logo">
+            <img src="/images/paper-plane.png" alt="Logo">
+            <h2>Talksy</h2>
+            <p>Smarter Chats, Happier Connections!</p>
+            <a href="#sign-in" class="sign-in-link">Sign In <i class="fa-solid fa-arrow-right"></i></a>
         </div>
     </div>
+    <div class="right-panel" id="sign-in">
+        <img class="wave" src="/images/wave.svg">
+        <h2>Login to your account</h2>
+        <form action="/rest/login" method="post">
+            <input type="text" name="username" placeholder="User name" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <div class="terms">
+                <input type="checkbox" required> By Signing Up I agree with <a href="#">Terms & Conditions</a>
+            </div>
+            <div class="buttons">
+                <button type="sign-up" id="create-user" class="sign-up">Sign Up</button>
+                <button type="submit" class="sign-in">Sign In</button>
+            </div>
+        </form>
+    </div>
+    <div class="right-panel" id="sign-up">
+        <img class="wave" src="/images/wave.svg">
+        <h2>Create your account</h2>
+        <form action="/rest/add-user" method="post">
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="text" name="username" placeholder="User name" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <div class="terms">
+                <input type="checkbox" required> By Signing Up I agree with <a href="#">Terms & Conditions</a>
+            </div>
+            <div class="buttons">
+                <button type="submit" class="sign-up">Sign Up</button>
+            </div>
+        </form>
+    </div>
 </div>
-<script>
-    console.log($)
-</script>
+<script src="/javascripts/pagejs/login.js"></script>

@@ -5,12 +5,12 @@ const msge = require('../querys/messages');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('login', { title: 'Express' });
+  res.render('login', { title: 'Talksy' });
 });
 
-router.get('/signup', (req, res, next) => {
-  res.render('signup');
-})
+// router.get('/signup', (req, res, next) => {
+//   res.render('signup');
+// })
 
 router.get('/home',(req, res, next)=>{
   if(req.session.loggedIn) {
