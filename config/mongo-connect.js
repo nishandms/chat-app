@@ -3,13 +3,12 @@ const state = {
     db: null
 };
 
-module.exports.connect = (done) => {
-    const url = 'mongodb://localhost:27017/'
+module.exports.connect = (done) => {   
+    const url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.jslxrzk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`  
     const dbname = "chat-app"
 
     mongoClient.connect(url, (err, data) => {
-        console.log(err,data)
-        if (err) return data(err);
+        if (err) return err;
         state.db = data.db(dbname);
         done()
     })
