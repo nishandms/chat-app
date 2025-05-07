@@ -8,7 +8,6 @@ module.exports = {
         return new Promise(async (resolve, reject) => {
             user.password = await bcrypt.hash(user.password, 10);
             db.getDb().collection(constants.user).insertOne(user).then((data) => {
-                console.log(data.insertedId.toString())
                 resolve(data.insertedId.toString())
             }).catch(err => {
                 reject(err)
@@ -17,7 +16,6 @@ module.exports = {
     },
     authenticate: (user) => {
         return new Promise(async (resolve, reject) => {
-            console.log(db.getDb());
             let userData = await db.getDb().collection(constants.user).findOne({ username: user.username })
             if (userData) {
                 bcrypt.compare(user.password, userData.password).then(data => {
