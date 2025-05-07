@@ -17,6 +17,7 @@ module.exports = {
     },
     authenticate: (user) => {
         return new Promise(async (resolve, reject) => {
+            console.log(db.getDb());
             let userData = await db.getDb().collection(constants.user).findOne({ username: user.username })
             if (userData) {
                 bcrypt.compare(user.password, userData.password).then(data => {
