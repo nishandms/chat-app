@@ -8,7 +8,6 @@ module.exports.connect = (done) => {
     const dbname = "chat-app"
 
     mongoClient.connect(url, (err, data) => {
-        console.log(err, data);
         if (err) return err;
         state.db = data.db(dbname);
         done()

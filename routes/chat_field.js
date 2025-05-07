@@ -6,6 +6,7 @@ const io = require('socket.io')(4000).sockets;
 
 
 io.on('connection', function (socket) {
+  console.log('connected to socket',socket);
   socket.on('join', function (room) {
     console.log('joined in the room')
     socket.join(room);
