@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+const { app,io } = require('../app');
 var debug = require('debug')('chat-app:server');
 var http = require('http');
 
@@ -24,6 +24,8 @@ var server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
+
+io.attach(server)
 
 server.listen(port);
 server.on('error', onError);
@@ -86,4 +88,5 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+  console.log(`Server running on ${bind}`);
 }

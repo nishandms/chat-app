@@ -1,40 +1,24 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
 const querys = require('../querys/messages');
-const io = require('socket.io')(4000).sockets;
 
+module.exports = function(io) {
+  const router = express.Router();
 
+  io.on('connection', function(socket) {
+    console.log('connected to socket');
 
-io.on('connection', function (socket) {
-  console.log('connected to socket',socket);
-  socket.on('join', function (room) {
-    console.log('joined in the room')
-    socket.join(room);
-  })
-  socket.on('send', function (data) {
-    if (data) {
-      console.log(data)
-      socket.to(data.toId).emit('message', data);
-      // querys.addMessage(data.fromId,data).then(res=> {
-      //   console.log(res);
-      // });
-      // querys.addMessage(data.toId,data).then(res=> {
-      //   console.log(res);
-      // })
-    }
+    socket.on('join', function(room) {
+      console.log('joined room:', room);
+      socket.join(room);
+    });
+
+    socket.on('send', function(data) {
+      if (data) {
+        console.log(data);
+        socket.to(data.toId).emit('message', data);
+      }
+    });
   });
 
-  function status(result) {
-    socket.emit('status', { connected: true })
-  }
-
-  function getAllMessage() {
-    querys.getAllMessages().then(data => {
-      socket.emit('recieve', data)
-    })
-  }
-});
-
-
-
-module.exports = router;
+  return router;
+};
