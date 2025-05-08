@@ -1,7 +1,9 @@
 let fromUserId;
 let toUserId;
 const isMobile = window.innerWidth <= 767 ? true : false;
-const socket = io.connect('http://localhost:4000', { transports: ['websocket'] })
+const socket = io(window.location.origin, {
+    transports: ['websocket'],
+  });
 
 $(document).ready(function() {
     initEvents();
