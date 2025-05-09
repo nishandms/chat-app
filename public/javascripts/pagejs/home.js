@@ -80,7 +80,6 @@ function getUserDetails() {
     }).done(data => {
         fromUserId = data._id;
         socket.emit('join', fromUserId);
-        console.log(data)
     })
 }
 
@@ -105,6 +104,7 @@ function getMsgPanel(msge, direction) {
 function loadChat(id, event) {
     $("#field").html('');
     $(".chat-item").removeClass("active");
+    $("#frnd-name").html(event.children[1].children[0].innerHTML);  
     $(event).addClass('active');
     if(isMobile)  switchUi('chat');
     toUserId = id;
