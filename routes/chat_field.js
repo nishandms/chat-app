@@ -14,7 +14,6 @@ module.exports = function(io) {
 
     socket.on('send', function(data) {
       if (data) {
-        console.log(data);
         socket.to(data.toId).emit('message', data);
       }
     });
